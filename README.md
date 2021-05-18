@@ -14,30 +14,31 @@
 | `<Tab>`         | 跳到本文件中下一个 wiki 链接                   |
 | `<Shift-Tab> `  | 跳到本文件中上一个 wiki 链接                   |
 ## vim surround 的使用
-- 一些常用命令
  **普通模式** 	
 
-| 命令                 | 说明 + 示例                                                                      |
-|----------------------|----------------------------------------------------------------------------------|
-| ds                   | 删除括号                                                                         |
-| `ds` `"`             | `"Hello world!"` =><br> `Hello world!`                                           |
-| cs                   | 替换括号                                                                         |
-| `cs` `"(`            | `"Hello world!"` =><br> `(Hello world!)`                                         |
-| cS                   | 替换括号，括号内文本做新一行                                                     |
-| `cS` `"{`            | `"Hello world!"` =><br> `{` <br> &nbsp;&nbsp;&nbsp;&nbsp;`Hello world!` <br> `}` |
-| ys                   | 添加括号(配合vim光标移动)                                                        |
-| `ys` `w` `[`         | `Hello world!` =><br> `[Hello] world!`                                           |
-| `ys` `w` `<em` Enter | `Hello world!` =><br> `<em>Hello<em> world!`                                     |
-| yS                   | 添加括号，括号内文本做新一行                                                     |
-| `yS` `w` `[`         | `Hello world!` =><br> `[` <br> &nbsp;&nbsp;&nbsp;&nbsp; `Hello` <br> `] world!`  |
-| yss                  | 整行括起来                                                                       |
-| `yss` `(`            | `Hello world!` =><br> `( Hello world! )`                                         |
-| ySS                  | 整行括起来，括号内文本做新一行                                                   |
-| `ySS` `{`            | `Hello world!` =><br> `{` <br> &nbsp;&nbsp; `Hello world! ` <br> `}`             |
-| `ySS` `<div` Enter   | `Hello world!` =><br> `<div>` <br> &nbsp;&nbsp; `Hello world! ` <br> `<div>`     |
-| ySs                  | 与ySs功能相同                                                                    |
+| 命令                 | 说明 + 示例                                                                     |
+|----------------------|---------------------------------------------------------------------------------|
+| ds                   | 删除括号                                                                        |
+| `ds` `"`             | `"Hello world!"` =><br> `Hello world!`                                          |
+| cs                   | 替换括号                                                                        |
+| `cs` `"(`            | `"Hello world!"` =><br> `(Hello world!)`                                        |
+| cS                   | 替换括号，括号内文本做新一行                                                    |
+| `cS` `"{`            | `"Hello world!"` =><br> `{` <br> &nbsp;&nbsp;&nbsp;&nbsp;`Hello world!` <br> `} |
+| ys                   | 添加括号(配合vim光标移动)                                                       |
+| `ys` `w` `[`         | `Hello world!` =><br> `[Hello] world!`                                          |
+| `ys` `w` `<em` Enter | `Hello world!` =><br> `<em>Hello<em> world!`                                    |
+| yS                   | 添加括号，括号内文本做新一行                                                    |
+| `yS` `w` `[`         | `Hello world!` =><br> `[` <br> &nbsp;&nbsp;&nbsp;&nbsp; `Hello` <br> `] world!` |
+| yss                  | 整行括起来                                                                      |
+| `yss` `(`            | `Hello world!` =><br> `( Hello world! )`                                        |
+| ySS                  | 整行括起来，括号内文本做新一行                                                  |
+| `ySS` `{`            | `Hello world!` =><br> `{` <br> &nbsp;&nbsp; `Hello world! ` <br> `}`            |
+| `ySS` `<div` Enter   | `Hello world!` =><br> `<div>` <br> &nbsp;&nbsp; `Hello world! ` <br> `<div>`    |
+| ySs                  | 与ySs功能相同                                                                   |
 
 **可视模式** 
+
+
 | 命令             | 说明 + 示例                                                           |
 |------------------|-----------------------------------------------------------------------|
 | S                | 选中的括起来                                                          |
@@ -86,3 +87,6 @@
     	<Enter> 竖屏打开多个文件,无法打开同一个文件
     	s 横屏打开文件,无法打开同一个文件
 ```	
+
+
+	
