@@ -57,7 +57,7 @@ nnoremap <C-s-tab> :bp<CR>
 
 "markdown
 "autocmd Filetype markdown map <leader>w yiWi[<esc>Ea](<esc>pa)
-autocmd Filetype markdown inoremap <buffer> ,f <Esc>/<++><CR>:nohlsearch<CR>c4l
+autocmd Filetype markdown inoremap <buffer>,f <Esc>/<++><CR>:nohlsearch<CR>c4l
 autocmd Filetype markdown inoremap <buffer>,n ---<Enter><Enter>
 autocmd Filetype markdown inoremap <buffer>,b **** <++><Esc>F*hi
 autocmd Filetype markdown inoremap <buffer>,s ~~~~ <++><Esc>F~hi
@@ -72,7 +72,7 @@ autocmd Filetype markdown inoremap <buffer>,2 ##<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer>,3 ###<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer>,4 ####<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer>,l --------<Enter>
-autocmd Filetype markdown noremap <buffer>,m :MarkdownPreview<CR>
+autocmd Filetype markdown noremap <buffer><F2> :MarkdownPreview<CR>
 autocmd Filetype markdown noremap <buffer>,ms :MarkdownPreviewStop<CR>
 
 
@@ -165,7 +165,6 @@ let g:ale_linters = {
 let g:coc_global_extensions = [
  \ 'coc-vimlsp',
  \ 'coc-highlight']
-
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -390,15 +389,9 @@ nnoremap   <silent>   <F12>   :FloatermToggle<CR>
 tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
 
 
-" ===
-" === vim-table-mode
-" ===
-noremap <LEADER>tm :TableModeToggle<CR>
-"let g:table_mode_disable_mappings = 1
-let g:table_mode_cell_text_object_i_map = 'k<Bar>'
 
 "===
-"======MarkdownPreview
+"======MarkDownPreview配置
 "===
 " set to 1, nvim will open the preview window after entering the markdown buffer
 " default: 0
@@ -472,27 +465,10 @@ let g:mkdp_preview_options = {
     \ 'disable_filename': 0
     \ }
 
-" use a custom markdown style must be absolute path
-" like '/Users/username/markdown.css' or expand('~/markdown.css')
-let g:mkdp_markdown_css = ''
 
-" use a custom highlight style must absolute path
-" like '/Users/username/highlight.css' or expand('~/highlight.css')
-let g:mkdp_highlight_css = ''
-
-" use a custom port to start server or random for empty
-let g:mkdp_port = ''
-
-" preview page title
-" ${name} will be replace with the file name
-let g:mkdp_page_title = '「${name}」'
-
-" recognized filetypes
-" these filetypes will have MarkdownPreview... commands
-let g:mkdp_filetypes = ['markdown']
-
-
-" Compile function
+"-----
+"----- Compile function
+"-----
 noremap <F2> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
 	exec "w"
@@ -519,7 +495,7 @@ func! CompileRunGcc()
 	elseif &filetype == 'html'
 		silent! exec "!".g:mkdp_browser." % &"
 	elseif &filetype == 'markdown'
-		exec "MarkdownPreview"
+		execu "MarkdownPreview"
 	elseif &filetype == 'tex'
 		silent! exec "VimtexStop"
 		silent! exec "VimtexCompile"
