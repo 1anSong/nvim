@@ -1,3 +1,4 @@
+# 1anSong`s vim user guide
 ## vim viki的使用
  **normnal模式下** 
 | 命令            | 说明                                           |
@@ -14,7 +15,7 @@
 | `<Tab>`         | 跳到本文件中下一个 wiki 链接                   |
 | `<Shift-Tab> `  | 跳到本文件中上一个 wiki 链接                   |
 ## vim surround 的使用
- **普通模式** 	
+ **normal** 	
 
 | 命令                 | 说明 + 示例                                                                     |
 |----------------------|---------------------------------------------------------------------------------|
@@ -36,7 +37,7 @@
 | `ySS` `<div` Enter   | `Hello world!` =><br> `<div>` <br> &nbsp;&nbsp; `Hello world! ` <br> `<div>`    |
 | ySs                  | 与ySs功能相同                                                                   |
 
-**可视模式** 
+**visual**
 
 
 | 命令             | 说明 + 示例                                                           |
@@ -88,5 +89,25 @@
     	s 横屏打开文件,无法打开同一个文件
 ```	
 
-
-	
+## vimtex
+| 命令                               | 说明                                                                                    |
+|------------------------------------|-----------------------------------------------------------------------------------------|
+| `<leader>ll`                       | 使用默认编译器（latexmk）开始监听`.tex` 文件的变化，编译 LaTeX 项目并打开 PDF 预览界面 |
+| `<leader>lk` or 第二次`<leader>ll` | 停止编译器监听文件变动，停止编译                                                        |
+| `<leader>lv`                       | 正向从 Neovim 光标位置同步 PDF 显示区域                                                 |
+| `<leader>lc`                       | 清理编译生成的中间文件                                                                  |
+- 具体请参见 [vimtex](https://github.com/lervag/vimtex)
+### issues
+1. 无法书写中文。
+解决办法: 将以下内容加入init.vim
+```
+	let g:vimtex_compiler_latexmk_engines={
+	\ '_':'-xelatex',
+	\'xelatex':'-xelatex',
+	\'pdflatex':'-pdf',
+ 	\}
+```
+2. coc补全相关
+```
+可以选择 coc-vimtex 或 coc-texlab
+```

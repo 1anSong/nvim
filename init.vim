@@ -34,26 +34,25 @@ set showmode
 "tags
 set tags=./.tags;,.tags
 "设置Tab键长度为4空格
-set tabstop=4
+set tabstop=2
 "设置自动缩进长度为4空格'
-set shiftwidth=4
+set shiftwidth=2
 "继承前一行的缩进方式，适用于多行注释'
-set autoindent
-
+"set autoindent
 syntax enable 
 set background=dark
-"set background=light
+
 colorscheme jellybeans
 
 "-----
 "-----Basic Mappings
 "-----
-inoremap <M-o> <Esc>o
+inoremap <M-0> <Esc>o
 inoremap <M-O> <Esc>O
 
-"按ctrl+tab 或者 ctrl+shift+tab在打开的文件之间切换
-nnoremap <C-tab> :bn<CR>
-nnoremap <C-s-tab> :bp<CR>
+"按ctrl+j或者ctrl+k在打开的文件之间切换
+nnoremap <C-J> :bn<CR>
+nnoremap <C-K> :bp<CR> 
 
 "markdown
 "autocmd Filetype markdown map <leader>w yiWi[<esc>Ea](<esc>pa)
@@ -74,7 +73,6 @@ autocmd Filetype markdown inoremap <buffer>,4 ####<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer>,l --------<Enter>
 autocmd Filetype markdown noremap <buffer><F2> :MarkdownPreview<CR>
 autocmd Filetype markdown noremap <buffer>,ms :MarkdownPreviewStop<CR>
-
 
 "启用vim-table-mode
 noremap <leader>tm :TableModeToggle<CR>
@@ -104,7 +102,7 @@ Plug 'frazrepo/vim-rainbow'
 Plug 'ryanoasis/vim-devicons'
 "---代码片段
 Plug 'honza/vim-snippets'
-"---vimspector
+"---dubugger
 "Plug 'puremourning/vimspector',{'do':'./install_gadget.py --enable-python'}
 "---fzf
 Plug 'junegunn/fzf',{ 'do':{ -> fzf#install()}}
@@ -115,6 +113,10 @@ Plug 'voldikss/vim-floaterm'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 Plug 'vimwiki/vimwiki'
+"--- tex
+Plug 'lervag/vimtex'
+"---Editor Enhancement
+Plug 'tpope/vim-surround'
 call plug#end()
 
 
@@ -158,13 +160,19 @@ let g:ale_linters = {
 \   'python': ['pylint'],
 \}
 
-
 "-----
 "-----coc.nvim
 "-----
 let g:coc_global_extensions = [
  \ 'coc-vimlsp',
- \ 'coc-highlight']
+ \ 'coc-highlight',
+ \ 'coc-pairs',
+ \ 'coc-highlight',
+ \ 'coc-texlab',
+ \ 'coc-pyright',
+ \ 'coc-json',
+ \ 'coc-snippets']
+ 
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -467,6 +475,20 @@ let g:mkdp_preview_options = {
 
 
 "-----
+"-----tex
+"-----
+
+let g:tex_flavor='latex'
+let g:vimtex_quickfix_mode=0
+let g:vimtex_view_general_viewer='zathura'
+let g:vimtex_view_general_method='zathura'
+let g:vimtex_view_compiler_progname='nvr'
+let g:vimtex_compiler_latexmk_engines={
+	\ '_':'-xelatex',
+	\'xelatex':'-xelatex',
+	\'pdflatex':'-pdf',
+ 	\}
+"-----
 "----- Compile function
 "-----
 noremap <F2> :call CompileRunGcc()<CR>
@@ -476,13 +498,13 @@ func! CompileRunGcc()
 		set splitbelow
 		exec "!g++ % -o %<"
 		:sp
-		:res -15
+		:res -10
 		:term ./%<
 	elseif &filetype == 'cpp'
 		set splitbelow
 		exec "!g++ -std=c++11 % -Wall -o %<"
 		:sp
-		:res -15
+		:res -10
 		:term ./%<
 	elseif &filetype == 'java'
 		set splitbelow
