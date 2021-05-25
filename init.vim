@@ -18,7 +18,7 @@ set termencoding=utf-8
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 "默认显示行号/相对行号
 set nu
-set relativenumber
+set rnu
 
 "高亮显示当前行或者列
 "set cursorcolumn
