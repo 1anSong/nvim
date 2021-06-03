@@ -44,6 +44,11 @@ set background=dark
 
 colorscheme jellybeans
 
+" 自动跳到上次打开的光标位置
+if has("autocmd")  
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif  
+endif 
+
 "-----
 "-----Basic Mappings
 "-----
@@ -537,3 +542,4 @@ func! CompileRunGcc()
 		:term go run .
 	endif
 endfunc
+
