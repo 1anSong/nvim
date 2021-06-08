@@ -96,6 +96,7 @@
 | `<leader>lk` or 第二次`<leader>ll` | 停止编译器监听文件变动，停止编译                                                        |
 | `<leader>lv`                       | 正向从 Neovim 光标位置同步 PDF 显示区域                                                 |
 | `<leader>lc`                       | 清理编译生成的中间文件                                                                  |
+
 - 具体请参见 [vimtex](https://github.com/lervag/vimtex)
 ### issues
 1. 无法书写中文。
