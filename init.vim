@@ -19,7 +19,6 @@ set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 "默认显示行号/相对行号
 set nu
 set rnu
-
 "高亮显示当前行或者列
 "set cursorcolumn
 set cursorline
@@ -39,6 +38,15 @@ set tabstop=2
 set shiftwidth=2
 "继承前一行的缩进方式，适用于多行注释'
 "set autoindent
+"设置垂直分屏符号
+"set fillchars=vert:*
+"solve problem in tmux
+set t_Co=256
+" 
+highlight Visual term=bold cterm=bold ctermbg=red ctermfg=yellow
+"C/C++
+set cindent
+
 syntax enable 
 set background=dark
 
@@ -52,7 +60,7 @@ endif
 "-----
 "-----Basic Mappings
 "-----
-inoremap <M-0> <Esc>o
+inoremap <M-o> <Esc>o
 inoremap <M-O> <Esc>O
 
 "按ctrl+j或者ctrl+k在打开的文件之间切换
@@ -108,7 +116,7 @@ Plug 'ryanoasis/vim-devicons'
 "---代码片段
 Plug 'honza/vim-snippets'
 "---dubugger
-"Plug 'puremourning/vimspector',{'do':'./install_gadget.py --enable-python'}
+Plug 'puremourning/vimspector',{'do':'./install_gadget.py --enable-python'}
 "---fzf
 Plug 'junegunn/fzf',{ 'do':{ -> fzf#install()}}
 Plug 'junegunn/fzf.vim'
@@ -160,8 +168,8 @@ nmap <Leader>d :ALEDetail<CR>
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}\ %{ALEGetStatusLine()}
 "使用clang对c和c++进行语法检查，对python使用pylint进行语法检查
 let g:ale_linters = {
-\   'c++': ['clangd'],
-\   'c': ['clang'],
+\   'c++': ['ccls'],
+\   'c': ['ccls'],
 \   'python': ['pylint'],
 \}
 
@@ -521,6 +529,7 @@ func! CompileRunGcc()
 	elseif &filetype == 'python'
 		set splitbelow
 		:sp
+		:res -10
 		:term python3 %
 	elseif &filetype == 'html'
 		silent! exec "!".g:mkdp_browser." % &"
