@@ -57,6 +57,9 @@ if has("autocmd")
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif  
 endif 
 
+"自动把光标所在行置入中间
+"set so=999
+
 "-----
 "-----Basic Mappings
 "-----
@@ -64,8 +67,8 @@ inoremap <M-o> <Esc>o
 inoremap <M-O> <Esc>O
 
 "按ctrl+j或者ctrl+k在打开的文件之间切换
-nnoremap <C-J> :bn<CR>
-nnoremap <C-K> :bp<CR> 
+"nnoremap <C-J> :bn<CR>
+"nnoremap <C-K> :bp<CR> 
 
 "markdown
 "autocmd Filetype markdown map <leader>w yiWi[<esc>Ea](<esc>pa)
@@ -85,7 +88,7 @@ autocmd Filetype markdown inoremap <buffer>,3 ###<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer>,4 ####<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer>,l --------<Enter>
 autocmd Filetype markdown noremap <buffer><F2> :MarkdownPreview<CR>
-autocmd Filetype markdown noremap <buffer>,ms :MarkdownPreviewStop<CR>
+"autocmd Filetype markdown noremap <buffer>,ms :MarkdownPreviewStop<CR>
 
 "启用vim-table-mode
 noremap <leader>tm :TableModeToggle<CR>
@@ -128,8 +131,14 @@ Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 Plug 'vimwiki/vimwiki'
 "--- tex
 Plug 'lervag/vimtex'
+"--- html
+Plug 'othree/html5.vim'
 "---Editor Enhancement
 Plug 'tpope/vim-surround'
+"termial
+Plug 'kassio/neoterm'
+"
+Plug 'skywind3000/asyncrun.vim'
 call plug#end()
 
 
@@ -167,11 +176,22 @@ nmap <Leader>d :ALEDetail<CR>
 "设置状态栏显示的内容
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}\ %{ALEGetStatusLine()}
 "使用clang对c和c++进行语法检查，对python使用pylint进行语法检查
-let g:ale_linters = {
-\   'c++': ['ccls'],
-\   'c': ['ccls'],
-\   'python': ['pylint'],
-\}
+"let g:ale_linters = {
+"\   'c++': ['ccls'],
+"\   'c': ['ccls'],
+"\   'python': ['pylint'],
+"\}
+let g:ale_linters = {								
+			\   'cpp': ['g++','cppcheck'],
+			\   'c': ['gcc','cppcheck'],
+			\   'python': ['pylint'],
+			\}
+
+let g:ale_c_cc_options = '-Wall -std=gnu11'
+let g:ale_cpp_cc_options = '-Wall -std=c++11'
+let g:ale_c_cppcheck_options = ''
+let g:ale_cpp_cppcheck_options = ''
+let g:ale_python_pylint_options= '--extension-pkg-whitelist=PyQt5,cv2'
 
 "-----
 "-----coc.nvim
@@ -184,7 +204,8 @@ let g:coc_global_extensions = [
  \ 'coc-texlab',
  \ 'coc-pyright',
  \ 'coc-json',
- \ 'coc-snippets']
+ \ 'coc-snippets',
+ \ 'coc-html']
  
 
 " TextEdit might fail if hidden is not set.
@@ -381,13 +402,14 @@ map <C-n> :NERDTreeToggle<CR>
 "-----
 "----- vimspector
 "-----
-let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+
+let g:vimspector_enable_mappings = 'HUMAN'
 function! s:read_template_into_buffer(template)
 	" has to be a function to avoid the extra space fzf#run insers otherwise
-	execute '0r D:/software/vim/vim82/pack/dist/opt/vimspector/vimspector_json/'.a:template
+	execute '0r ~/.config/nvim/vimspector_json/'.a:template
 endfunction
 command! -bang -nargs=* LoadVimSpectorJsonTemplate call fzf#run({
-			\   'source': 'ls -1 D:/software/vim/vim82/pack/dist/opt/vimspector/vimspector_json/',
+			\   'source': 'ls -1 ~/.config/nvim/vimspector_json',
 			\   'down': 20,
 			\   'sink': function('<sid>read_template_into_buffer')
 			\ })
@@ -395,21 +417,6 @@ noremap <leader>vs :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
 sign define vimspectorBP text=☛ texthl=Normal
 sign define vimspectorBPDisabled text=☞ texthl=Normal
 sign define vimspectorPC text=🔶 texthl=SpellBad
-
-let g:floaterm_title = ''
-let g:floaterm_width = 0.6
-let g:floaterm_height = 0.8
-let g:floaterm_autoclose = 1
-nnoremap   <silent>   <F7>    :FloatermNew<CR>
-tnoremap   <silent>   <F7>    <C-\><C-n>:FloatermNew<CR>
-nnoremap   <silent>   <F8>    :FloatermPrev<CR>
-tnoremap   <silent>   <F8>    <C-\><C-n>:FloatermPrev<CR>
-nnoremap   <silent>   <F9>    :FloatermNext<CR>
-tnoremap   <silent>   <F9>    <C-\><C-n>:FloatermNext<CR>
-nnoremap   <silent>   <F12>   :FloatermToggle<CR>
-tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
-
-
 
 "===
 "======MarkDownPreview配置
@@ -447,7 +454,8 @@ let g:mkdp_open_ip = ''
 
 " specify browser to open preview page
 " default: ''
-let g:mkdp_browser = ''
+	"let g:mkdp_path_to_chrome="/usr/share/bash-completion/completions/chromium-browser"
+	let g:mkdp_browser = ''
 
 " set to 1, echo preview page url in command line when open preview page
 " default is 0
@@ -473,7 +481,7 @@ let g:mkdp_browserfunc = ''
 " content_editable: if enable content editable for preview page, default: v:false
 " disable_filename: if disable filename header for preview page, default: 0
 let g:mkdp_preview_options = {
-    \ 'mkit': {},
+   \ 'mkit': {},
     \ 'katex': {},
     \ 'uml': {},
     \ 'maid': {},
@@ -485,7 +493,6 @@ let g:mkdp_preview_options = {
     \ 'content_editable': v:false,
     \ 'disable_filename': 0
     \ }
-
 
 "-----
 "-----tex
@@ -501,15 +508,18 @@ let g:vimtex_compiler_latexmk_engines={
 	\'xelatex':'-xelatex',
 	\'pdflatex':'-pdf',
  	\}
+
+
 "-----
 "----- Compile function
 "-----
+	
 noremap <F2> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
 	exec "w"
 	if &filetype == 'c'
 		set splitbelow
-		exec "!g++ % -o %<"
+		exec "!gcc % -o %<"
 		:sp
 		:res -10
 		:term ./%<
@@ -534,7 +544,7 @@ func! CompileRunGcc()
 	elseif &filetype == 'html'
 		silent! exec "!".g:mkdp_browser." % &"
 	elseif &filetype == 'markdown'
-		execu "MarkdownPreview"
+		exec "MarkdownPreview"
 	elseif &filetype == 'tex'
 		silent! exec "VimtexStop"
 		silent! exec "VimtexCompile"

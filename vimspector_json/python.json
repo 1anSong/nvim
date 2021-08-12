@@ -2,13 +2,13 @@
 	"adapters": {
 		"debugpy": {
 			"command": [
-				"python",
+				"python3",
 				"-m",
 				"debugpy.adapter"
 			],
 			"name": "debugpy",
 			"configuration": {
-				"python": "python"
+				"python": "python3"
 			}
 		}
 	},
@@ -17,7 +17,7 @@
 			"adapter": "debugpy",
 			"configuration": {
 				"request": "launch",
-				"type": "python",
+				"type": "python3",
 				"cwd": "${workspaceRoot}",
 				"program": "${file}",
 				"stopOnEntry": true,
