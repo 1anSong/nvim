@@ -102,7 +102,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "---vim美化
 Plug 'mhinz/vim-startify'
 "Plug 'w0ng/vim-hybrid'
-"Plug 'nanotech/jellybeans.vim'
+Plug 'nanotech/jellybeans.vim'
 "Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
