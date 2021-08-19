@@ -7,7 +7,6 @@
 "Author: @1anSong
 "mail:3013sxc@gmail.com
 
-
 "-----
 "-----基础配置
 "-----
@@ -28,8 +27,9 @@ set nofoldenable
 set noundofile
 set noswapfile
 set nobackup
-"左下角显示当前vim模式
-set showmode
+"左下角不显示当前vim模式
+set noshowmode
+"set showmode
 "tags
 set tags=./.tags;,.tags
 "设置Tab键长度为4空格
@@ -101,9 +101,9 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "---vim美化
 Plug 'mhinz/vim-startify'
-Plug 'w0ng/vim-hybrid'
-Plug 'nanotech/jellybeans.vim'
-Plug 'altercation/vim-colors-solarized'
+"Plug 'w0ng/vim-hybrid'
+"Plug 'nanotech/jellybeans.vim'
+"Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
@@ -133,6 +133,8 @@ Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'
 "--- html
 Plug 'othree/html5.vim'
+Plug 'mattn/emmet-vim'
+
 "---Editor Enhancement
 Plug 'tpope/vim-surround'
 "termial
@@ -502,7 +504,7 @@ let g:tex_flavor='latex'
 let g:vimtex_quickfix_mode=0
 let g:vimtex_view_general_viewer='zathura'
 let g:vimtex_view_general_method='zathura'
-let g:vimtex_view_compiler_progname='nvr'
+let g:vimtex_compiler_progname='nvr'
 let g:vimtex_compiler_latexmk_engines={
 	\ '_':'-xelatex',
 	\'xelatex':'-xelatex',
