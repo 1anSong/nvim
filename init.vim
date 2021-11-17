@@ -496,6 +496,11 @@ func! CompileRunGcc()
 		:sp
 		:res -10
 		:term python3 %
+	elseif &filetype == 'tcl'
+		set splitbelow
+		:sp
+		:res -10
+		:term tclsh %
 	elseif &filetype == 'html'
 		silent! exec "!".g:mkdp_browser." % &"
 	elseif &filetype == 'markdown'
