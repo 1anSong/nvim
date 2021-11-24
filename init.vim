@@ -137,7 +137,6 @@ Plug 'lervag/vimtex'
 "--- html
 Plug 'othree/html5.vim'
 Plug 'mattn/emmet-vim'
-
 "---Editor Enhancement
 Plug 'tpope/vim-surround'
 "termial
@@ -450,18 +449,15 @@ let g:mkdp_preview_options = {
     \ }
 
 "-----
-"-----tex
+"-----latex
 "-----
 
 let g:tex_flavor='latex'
 let g:vimtex_quickfix_mode=0
-let g:vimtex_view_general_viewer='zathura'
-let g:vimtex_view_general_method='zathura'
+let g:vimtex_view_method='zathura'
 let g:vimtex_compiler_progname='nvr'
 let g:vimtex_compiler_latexmk_engines={
 	\ '_':'-xelatex',
-	\'xelatex':'-xelatex',
-	\'pdflatex':'-pdf',
  	\}
 
 
