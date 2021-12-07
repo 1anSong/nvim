@@ -457,9 +457,18 @@ let g:vimtex_quickfix_mode=0
 let g:vimtex_view_method='zathura'
 let g:vimtex_compiler_progname='nvr'
 let g:vimtex_compiler_latexmk_engines={
-	\ '_':'-xelatex',
+\ '_':'-xelatex',
  	\}
 
+
+"-----
+"-----floaterm
+"-----
+let g:floaterm_keymap_new = '<F7>'
+let g:floaterm_keymap_kill='<F18>'
+let g:floaterm_keymap_prev = '<F9>'
+let g:floaterm_keymap_next = '<F10>'
+let g:floaterm_keymap_toggle = '<F12>'
 
 "-----
 "----- Compile function
